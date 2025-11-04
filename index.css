@@ -14,8 +14,9 @@
 
 * {
   font-family: var(--primary-fonts);
-  padding: 0;
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 html {
@@ -71,12 +72,12 @@ h3 {
 
 .btn {
   border: 2px solid var(--button-border-color);
-  width: 10rem;
+  width: 12rem;
   padding: 5px;
   text-align: center;
   text-decoration: none;
   background-color: var(--button-color);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   transition: transform 0.04s;
 }
 

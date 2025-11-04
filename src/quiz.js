@@ -46,10 +46,10 @@ const setQuestionSet = async () => {
     
     switch (quizType){
         case "algebra":
-            questions = await fetchQuestions("./algebraQuestions.json");
+            questions = await fetchQuestions("../json/algebraQuestions.json");
             break;
         case "vocabulary":
-            questions = await fetchQuestions("./vocabQuestions.json");
+            questions = await fetchQuestions("../json/vocabQuestions.json");
             break;
         default:
             questions = [];
@@ -66,7 +66,7 @@ const nextQuestion = () => {
     questionCounter++;
     
     if (questionCounter > MAX_QUESTIONS || availableQuestions.length === 0){
-        localStorage.setItem("percentage", JSON.stringify(100 * (numberCorrect / totalQuestions).toFixed(3)));
+        localStorage.setItem("percentage", JSON.stringify(100 * (numberCorrect / totalQuestions).toFixed(4)));
         window.location.assign("./results.html");
     } else {
     

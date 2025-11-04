@@ -70,10 +70,12 @@
 /* Answer Distinctions */
 .correct {
   background-color: rgb(30, 202, 30);
+  border: 2px solid black;
 }
 
 .incorrect {
   background-color: rgb(255, 29, 29);
+  border: 2px solid black;
 }
 
 /* Media Adjustments */
