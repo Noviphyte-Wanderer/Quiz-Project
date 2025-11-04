@@ -18,3 +18,7 @@ There are four main pages:
   4. The results page give you your grade.
 
 There may be more to add in the future.
+
+The parts where I added my own spin to it are the nav bar which navigates to the quiz or home page, but the topic you choose in the nav bar determines which set of questions (.json file) the quiz fetches data from.
+
+In addition, I added multiple subjects.
