@@ -15,6 +15,7 @@ const extraComments = document.getElementById('extra-commentary');
 // CHOICE POINTERS
 const choices = [...document.getElementsByClassName('choice')];
 const submitBtn = document.getElementById('submit');
+const continueBtn = document.getElementById('continue')
 
 let MAX_QUESTIONS = 8;
 
@@ -26,6 +27,7 @@ const fetchQuestions = async (link) => {
     try{
         const res = await fetch(link);
         const data = await res.json();
+        console.log("L:", data.length);
         return data;
     } catch (err){
         console.error("ERROR OCCURED!", err);
@@ -38,7 +40,7 @@ function startQuiz() {
     questionCounter = 0;
 
     availableQuestions = [...questions];
-    
+    MAX_QUESTIONS = availableQuestions.length;
     nextQuestion();
 }
 
@@ -48,20 +50,21 @@ const setQuestionSet = async () => {
     switch (quizType){
         case "algebra":
             questions = await fetchQuestions("../json/algebraQuestions.json");
-            MAX_QUESTIONS = questions.length;
+            
             break;
         case "vocabulary":
             questions = await fetchQuestions("../json/vocabQuestions.json");
-            MAX_QUESTIONS = questions.length;
+            
             break;
         case "history":
-            questions = await fetchQuestions("..json/historyQuestions.json");
-            MAX_QUESTIONS = questions.length;;
+            questions = await fetchQuestions("../json/historyQuestions.json");
+            
+            console.log("Questions");
             break;
         default:
             questions = [];
     }
-  
+    
     startQuiz();
 }
 
@@ -106,20 +109,28 @@ const checkAnswer = (choice) => {
     choice.parentElement.classList.add(classToApply);
     result.classList.add(classToApply);
     result.innerText = (isCorrect) ? "CORRECT" : "INCORRECT";
-    result.style.visibility = "visible";
-    const extraComment = currentQuestion.has("extra-commentary");
-    extraComments.style.visibility = (extraComment) ? "visible" : "hidden";
+    result.classList.remove("hidden");
+    const extraComment = currentQuestion.hasOwnProperty("extra-commentary");
+    extraComments.innerText = (extraComment) ? currentQuestion["extra-commentary"] : "";
+    if (extraComment){
+        extraComments.classList.remove('hidden');
+    }
     numberCorrect += isCorrect ? 1 : 0;
-    setTimeout(() => {
+    
+    continueBtn.classList.remove("hidden");
+    submitBtn.classList.add('hidden');
+
+    continueBtn.addEventListener("click", () => {
+        submitBtn.classList.remove('hidden');
+        continueBtn.classList.add("hidden");
+
         choice.parentElement.classList.remove(classToApply);
         result.innerText = "";
-        result.style.visibility = "hidden";
         result.classList.remove(classToApply);
-
-        extraComments.innerText = (extraComment) ? extraComment : "";
+        extraComments.innerText = "";
+        result.classList.add('hidden');
         nextQuestion();
-    }, 1200);
-    
+    })
 }
 
 
@@ -129,5 +140,6 @@ submitBtn.addEventListener("click", () => {
     acceptingAnswers = false;
     checkAnswer(document.querySelector(".choice-container > input[type='radio']:checked"));
 })
+
 
 
