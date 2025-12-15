@@ -10,7 +10,8 @@ const applyBtn = document.getElementById('apply');
 const questionSetTable = {
     "algebra": "../json/algebraQuestions.json",
     "vocabulary": "../json/vocabQuestions.json",
-    "history": "../json/historyQuestions.json"
+    "history": "../json/historyQuestions.json",
+    "chemistry": "../json/chemistryQuestions.json"
 }
 
 const setNumQuestions = async (type) => {
